@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Buscar Propiedades</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="assets/css/estilo.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+  <h1>Buscar Propiedades</h1>
+
+  <input type="text" id="criterio" placeholder="Buscar por tipo, descripción o precio...">
+  <button id="buscar">Buscar</button>
+
+  <div id="resultados"></div>
+
+  <script>
+    $('#buscar').click(function () {
+      const criterio = $('#criterio').val().trim();
+      if (!criterio) {
+        Swal.fire('Atención', 'Debe ingresar un criterio de búsqueda.', 'warning');
+        return;
+      }
+      $.post('busqueda/buscar.php', {criterio}, function (data) {
+        $('#resultados').html(data);
+      });
+    });
+  </script>
+</body>
+</html>
